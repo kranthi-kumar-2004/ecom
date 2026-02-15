@@ -17,7 +17,7 @@ function Login() {
   const handleLogin = (e) => {
     e.preventDefault();
 
-    fetch("http://localhost:8080/login", {
+    fetch("https://ecom-backend-3h0k.onrender.com/products", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
