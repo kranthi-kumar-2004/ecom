@@ -17,7 +17,7 @@ function Login() {
   const handleLogin = (e) => {
     e.preventDefault();
 
-    fetch("https://ecom-backend-3h0k.onrender.com/products", {
+    fetch("https://ecom-backend-3h0k.onrender.com/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
