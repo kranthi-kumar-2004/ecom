@@ -61,6 +61,7 @@ body{
   margin-right:20px;
   border-radius:8px;
   width:50px;
+  cursor:pointer;
 }
 .addcart button{
   width: 40px;
