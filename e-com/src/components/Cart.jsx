@@ -19,27 +19,27 @@ function Cart() {
   }, [userId]);
 
   function loadProducts() {
-    fetch("http://localhost:8080/products")
+    fetch("https://ecom-backend-3h0k.onrender.com/products")
       .then(res => res.json())
       .then(data => setProducts(data));
   }
 
   function loadCart() {
-    fetch(`http://localhost:8080/cart/${userId}`)
+    fetch(`https://ecom-backend-3h0k.onrender.com/cart/${userId}`)
       .then(res => res.json())
       .then(data => setCart(data));
   }
 
   function add(productId) {
     fetch(
-      `http://localhost:8080/cart/add?userId=${userId}&productId=${productId}`,
+      `https://ecom-backend-3h0k.onrender.com/cart/add?userId=${userId}&productId=${productId}`,
       { method: "POST" }
     ).then(loadCart);
   }
 
   function remove(productId) {
     fetch(
-      `http://localhost:8080/cart/remove?userId=${userId}&productId=${productId}`,
+      `https://ecom-backend-3h0k.onrender.com/cart/remove?userId=${userId}&productId=${productId}`,
       { method: "POST" }
     ).then(loadCart);
   }
