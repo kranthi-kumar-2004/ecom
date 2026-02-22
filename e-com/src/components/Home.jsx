@@ -37,7 +37,7 @@ function Home() {
       })
       .catch(err => {
         console.error("Products error", err);
-        setLoading(false);
+        setLoading(true);
   });
   }
 
