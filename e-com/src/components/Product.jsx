@@ -7,7 +7,7 @@ function Product() {
   const [product, setProduct] = useState(null);
 
   useEffect(() => {
-    fetch(`http://localhost:8080/products/${id}`)
+    fetch(`https://ecom-backend-3h0k.onrender.com/products/${id}`)
       .then(res => res.json())
       .then(data => setProduct(data));
   }, [id]);
