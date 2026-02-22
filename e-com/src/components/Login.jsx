@@ -1,18 +1,18 @@
-import { useState } from "react";
-import { useNavigate, Navigate ,Link} from "react-router-dom";
+import { useState, useEffect } from "react";
+import{Link} from "react-router-dom"
 import "./css/Login.css";
 
-function Login() {
-  const navigate = useNavigate();
-  const userId = localStorage.getItem("userId");
-
+function Login({ close }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  if (userId) {
-    return <Navigate to="/" replace />;
-  }
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, []);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -22,10 +22,7 @@ function Login() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        username,
-        password,
-      }),
+      body: JSON.stringify({ username, password }),
     })
       .then((res) => {
         if (!res.ok) {
@@ -34,13 +31,10 @@ function Login() {
         return res.json();
       })
       .then((user) => {
-
         setError("");
-
         localStorage.setItem("userId", user.id);
         localStorage.setItem("username", user.username);
-
-        navigate("/", { replace: true });
+        close();
       })
       .catch(() => {
         setError("Invalid username or password");
@@ -50,6 +44,10 @@ function Login() {
   return (
     <div className="login-container">
       <form className="login-card" onSubmit={handleLogin}>
+        <span className="close-btn" onClick={close}>
+          &times;
+        </span>
+
         <h2>Login</h2>
 
         {error && <p className="error">{error}</p>}
@@ -71,6 +69,7 @@ function Login() {
         />
 
         <button type="submit">Login</button>
+
         <p>
           Don't have account? <Link to="/register">Register here</Link>
         </p>

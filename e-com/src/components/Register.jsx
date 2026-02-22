@@ -25,7 +25,7 @@ function Register() {
       .then(() => {
         setError("");
         setSuccess("Registration successful! Redirecting...");
-        setTimeout(() => navigate("/login"), 1500);
+        setTimeout(() => navigate("/"), 1500);
       })
       .catch(() => {
         setError("Username already exists");
@@ -62,7 +62,7 @@ function Register() {
         </form>
 
         <p>
-          Already have account? <Link to="/login">Login</Link>
+          Already have account? <Link to="/">Login</Link>
         </p>
       </div>
     </div>

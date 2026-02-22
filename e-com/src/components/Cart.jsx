@@ -9,11 +9,10 @@ function Cart() {
   const [cart, setCart] = useState([]);
   const [products, setProducts] = useState([]);
 
+  if(!userId){
+    return <h2 className="empty">Your cart is empty 🛒</h2>;
+  }
   useEffect(() => {
-    if (!userId) {
-      navigate("/login");
-      return;
-    }
     loadProducts();
     loadCart();
   }, [userId]);

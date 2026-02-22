@@ -1,20 +1,25 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Link } from "react-router-dom";
 import "./css/Home.css";
-
+import Loader from "./Loader";
 function Home() {
   const navigate = useNavigate();
-
+  const[loading,setLoading]=useState(true);
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
   const [userId, setUserId] = useState(
     localStorage.getItem("userId")
   );
-  
+  useEffect(()=>{
+    loadProducts(true);
+  },[]);
   useEffect(() => {
-    loadProducts();
-  }, []);
+  const interval = setInterval(() => {
+    loadProducts(false);
+  }, 5000);
 
+  return () => clearInterval(interval);
+}, []);
   useEffect(() => {
     if (userId) {
       loadCart();
@@ -24,10 +29,16 @@ function Home() {
   }, [userId]);
 
   function loadProducts() {
-    fetch("https://ecom-backend-3h0k.onrender.com/products")
+    fetch("http://localhost:8080/products")
       .then(res => res.json())
-      .then(data => setProducts(data))
-      .catch(err => console.error("Products error", err));
+      .then(data => {
+        setProducts(data);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error("Products error", err);
+        setLoading(true);
+  });
   }
 
   function loadCart() {
@@ -67,10 +78,15 @@ function Home() {
   }
 
   return (
+    <>
+    {loading?(<Loader/>):(
     <div className="product-grid">
       {products.map(p => (
+        
         <div className="card" key={p.id}>
+          <Link to={`/product/${p.id}`} className="product-link">
           <img src={p.image} alt={p.name} />
+          </Link>
           <h3>{p.name}</h3>
           <p>₹{p.price}</p>
 
@@ -95,6 +111,8 @@ function Home() {
         </div>
       ))}
     </div>
+  )}
+  </>
   );
 }
 
