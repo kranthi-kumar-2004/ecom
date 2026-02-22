@@ -55,10 +55,7 @@ function Home() {
     const item = cart.find(c => c.productId === productId);
     return item ? item.quantity : 0;
   }
-  function goProduct(id){
-    navigate("/product/{id}");
-    return;
-  }
+
   function addToCart(productId) {
     if (!userId) {
       navigate("/login");
@@ -86,7 +83,7 @@ function Home() {
     <div className="product-grid">
       {products.map(p => (
         
-        <div className="card" onClick={goProduct(p.id)} key={p.id}>
+        <div className="card" key={p.id}>
           <Link to={`/product/${p.id}`} className="product-link">
           <img src={p.image} alt={p.name} />
           </Link>
