@@ -29,7 +29,7 @@ function Home() {
   }, [userId]);
 
   function loadProducts() {
-    fetch("http://localhost:8080/products")
+    fetch("https://ecom-backend-3h0k.onrender.com/products")
       .then(res => res.json())
       .then(data => {
         setProducts(data);
