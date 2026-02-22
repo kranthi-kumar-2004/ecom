@@ -58,7 +58,7 @@ function Home() {
   function goProduct(id){
     navigate("/product/{id}");
     return;
-
+  }
   function addToCart(productId) {
     if (!userId) {
       navigate("/login");
